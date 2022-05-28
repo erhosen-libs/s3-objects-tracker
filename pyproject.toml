@@ -1,9 +1,26 @@
 [tool.poetry]
 name = "object-storage-adapter"
 version = "0.4.0"
-description = "Provides a storage adapter for S3"
+description = "Track already processed objects inside your s3 bucket."
 authors = ["Vladimir Vyazovetskov <erhosen@gmail.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/ErhoSen/s3-objects-tracker"
+repository = "https://github.com/ErhoSen/s3-objects-tracker"
+keywords = ["objects storage", "s3", "tracker", "published objects", "published objects tracker"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Other Environment",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed"
+]
+include = [
+    "LICENSE",
+]
 
 
 [tool.poetry.dependencies]
