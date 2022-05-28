@@ -25,7 +25,7 @@ async def test_common_workflow(object_storage_mock, s3_credentials):
     objects = [Object(i) for i in range(10)]
     async with S3ObjectsTracker(**s3_credentials) as tracker:
         assert tracker._published_ids == [], "Published IDs should be empty"
-        new_objects = await tracker.determine_new(objects)
+        new_objects = tracker.determine_new(objects)
         assert new_objects == objects, "New objects should be the same as objects"
         for _object in new_objects:
             await tracker.publish(_object)
@@ -35,7 +35,7 @@ async def test_common_workflow(object_storage_mock, s3_credentials):
         assert tracker._published_ids == [
             _object.id for _object in objects
         ], "First objects should be published"
-        new_objects = await tracker.determine_new(next_objects)
+        new_objects = tracker.determine_new(next_objects)
         assert new_objects == next_objects[5:], "Only last 5 objects should be new"
         for _object in new_objects:
             await tracker.publish(_object)
@@ -52,7 +52,7 @@ async def test_limit(object_storage_mock, s3_credentials):
     objects = [Object(i) for i in range(5)]
     async with S3ObjectsTracker(**s3_credentials, max_published_objects=5) as tracker:
         assert tracker._published_ids == [], "Published IDs should be empty"
-        new_objects = await tracker.determine_new(objects)
+        new_objects = tracker.determine_new(objects)
         assert new_objects == objects, "New objects should be the same as objects"
         for _object in objects:
             await tracker.publish(_object)
@@ -60,7 +60,7 @@ async def test_limit(object_storage_mock, s3_credentials):
     next_objects = [Object(i) for i in range(6)]
     async with S3ObjectsTracker(**s3_credentials, max_published_objects=5) as tracker:
         assert tracker._published_ids == [0, 1, 2, 3, 4], "Objects should be published"
-        new_objects = await tracker.determine_new(next_objects)
+        new_objects = tracker.determine_new(next_objects)
         assert new_objects == [Object(5)], "Only last _object should be new"
         await tracker.publish(new_objects[0])
 

@@ -72,7 +72,7 @@ class S3ObjectsTracker(Generic[IDT]):
         await self._upload_to_s3()
         await self._exit_stack.__aexit__(exc_type, exc_val, exc_tb)
 
-    async def determine_new(self, objects: List[T]) -> List[T]:
+    def determine_new(self, objects: List[T]) -> List[T]:
         new_objects = []
         for _object in objects:
             if _object.id not in self._published_ids:
