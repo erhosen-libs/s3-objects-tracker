@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "s3-objects-tracker"
-version = "0.1.0"
+version = "0.2.0"
 description = "Track already processed objects inside your s3 bucket."
 authors = ["Vladimir Vyazovetskov <erhosen@gmail.com>"]
 license = "MIT"
