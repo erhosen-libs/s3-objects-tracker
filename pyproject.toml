@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "object-storage-adapter"
+name = "s3-objects-tracker"
 version = "0.1.0"
 description = "Track already processed objects inside your s3 bucket."
 authors = ["Vladimir Vyazovetskov <erhosen@gmail.com>"]
