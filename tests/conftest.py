@@ -94,7 +94,7 @@ def empty_object_storage_mock():
 @pytest.fixture(scope="session")
 def s3_credentials():
     return {
-        "bucket": "test-bucket",
+        "bucket_name": "test-bucket",
         "endpoint_url": "http://localhost:9000",
         "aws_access_key_id": "test-access-key-id",
         "aws_secret_access_key": "test-secret-access-key",

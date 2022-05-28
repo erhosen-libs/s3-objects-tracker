@@ -17,14 +17,14 @@ T = TypeVar("T", bound=ObjectWithIDProtocol)
 class S3ObjectsTracker(Generic[IDT]):
     def __init__(
         self,
-        bucket: str,
+        bucket_name: str,
         endpoint_url: str,
         aws_access_key_id: str,
         aws_secret_access_key: str,
         filename: str = "data.json",
         max_published_objects: int = 50,
     ):
-        self.bucket = bucket
+        self.bucket_name = bucket_name
         self.endpoint_url = endpoint_url
         self.aws_access_key_id = aws_access_key_id
         self.aws_secret_access_key = aws_secret_access_key
@@ -37,7 +37,7 @@ class S3ObjectsTracker(Generic[IDT]):
 
     async def _fetch_from_s3(self) -> None:
         try:
-            response = await self._s3_client.get_object(Bucket=self.bucket, Key=self.filename)
+            response = await self._s3_client.get_object(Bucket=self.bucket_name, Key=self.filename)
         except self._s3_client.exceptions.NoSuchKey:
             self._published_ids = []
             return
@@ -49,7 +49,7 @@ class S3ObjectsTracker(Generic[IDT]):
         self._published_ids = self._published_ids[-self.max_published_objects :]
         json_str = json.dumps(self._published_ids) + "\n"
         await self._s3_client.put_object(
-            Bucket=self.bucket,
+            Bucket=self.bucket_name,
             Key=self.filename,
             Body=json_str.encode("utf-8"),
             ContentType="application/json",
