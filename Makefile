@@ -24,6 +24,6 @@ publish:
 # How to release:
 # 1) git pull
 # 2) make bump_version
-# 3) update __version__ var in pydjantic/__init__.py
+# 3) update __version__ var in s3_objects_tracker/__init__.py
 # 4) make build
 # 5) make publish
